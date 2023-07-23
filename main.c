@@ -65,6 +65,7 @@ int main(int argc, char* argv[]) {
 
     } else if (strcmp(option,"-r")==0) {
         fprintf(stdout, "%d\n", shortestPath(&grid));
+        freeGridMemory(&grid);
     } else {
         return EXIT_FAILURE;
     }

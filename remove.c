@@ -39,8 +39,17 @@ int shortestPath(Grid* grid) {
     while (!isQueueEmpty(&q)) {
         Cell curr = dequeue(&q, queueSize);
 
-        if (curr.row == 0 && curr.col == 0)
+        if (curr.row == 0 && curr.col == 0) {
+            free(q.array);
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < m; j++) {
+                    free(v[i][j]);
+                }
+                free(v[i]);
+            }
+            free(v);
             return curr.time;
+        }
 
         for (int i = 0; i < 4; i++) {
             int rw = curr.row + delrow[i];
@@ -68,6 +77,14 @@ int shortestPath(Grid* grid) {
             }
         }
     }
-
+    free(q.array);
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            free(v[i][j]);
+        }
+        free(v[i]);
+    }
+    free(v);
     return -1; 
 }
+
