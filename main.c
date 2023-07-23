@@ -64,7 +64,9 @@ int main(int argc, char* argv[]) {
         freeGridMemory(&grid);
 
     } else if (strcmp(option,"-r")==0) {
-        
+        findShortestPath2(&grid,0,0);
+    } else {
+        return EXIT_FAILURE;
     }
 
     return EXIT_SUCCESS;
@@ -123,6 +125,13 @@ void freeGridMemory(Grid* grid) {
 
 // Function to check if a cell is a valid room (not a wall and within the grid boundaries)
 bool isValidRoom(Grid* grid, int row, int col) {
+    int m=grid->m;
+    int n=grid->n;
+
+    if (grid->grid[0][0] == 1 || grid->grid[0][n - 1] == 1 ||
+        grid->grid[m - 1][0] == 1 || grid->grid[m - 1][n - 1] == 1) {
+        return false;
+    }
     return (row >= 0 && row < grid->m && col >= 0 && col < grid->n && grid->grid[row][col] == 0);
 }
 

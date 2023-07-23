@@ -19,6 +19,7 @@ typedef struct {
     int row;
     int col;
     int time; // Time to reach this cell from the start location
+    int wallsRemoved;
 } Cell;
 
 // Queue data structure for BFS
@@ -30,6 +31,8 @@ typedef struct {
 
 void findShortestPath(Grid* grid, int cornerRow, int cornerCol);
 bool isCornerCell(Grid* grid, int row, int col);
+
+void findShortestPath2(Grid* grid, int cornerRow, int cornerCol);
 
 
 void initializeQueue(Queue* queue, int size);
