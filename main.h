@@ -5,34 +5,36 @@
 #include <string.h>
 
 
-// Data structure to represent the grid
+
 typedef struct {
-    int m; // Number of rows
-    int n; // Number of columns
-    int start_row; // Start cell row
-    int start_col; // Start cell column
+    int m; 
+    int n; 
+    int start_row; 
+    int start_col; 
     int** grid;
 } Grid;
 
-// Data structure to represent a cell
+
 typedef struct {
     int row;
     int col;
-    int time; // Time to reach this cell from the start location
+    int time; 
     int wallsRemoved;
 } Cell;
 
-// Queue data structure for BFS
+
 typedef struct {
     Cell* array;
     int front;
     int rear;
 } Queue;
 
-void findShortestPath(Grid* grid, int cornerRow, int cornerCol);
-bool isCornerCell(Grid* grid, int row, int col);
 
-void findShortestPath2(Grid* grid, int cornerRow, int cornerCol);
+bool isCornerCell(Grid* grid, int row, int col);
+void findShortestPath(Grid* grid, int cornerRow, int cornerCol);
+
+int shortestPath(Grid* grid);
+bool isValidCell(int row, int col, int m, int n);
 
 
 void initializeQueue(Queue* queue, int size);
