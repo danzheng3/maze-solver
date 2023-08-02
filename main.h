@@ -31,7 +31,7 @@ typedef struct {
 
 
 bool isCornerCell(Grid* grid, int row, int col);
-void findShortestPath(Grid* grid, int cornerRow, int cornerCol);
+void findShortestPath(Grid* grid, int cornerRow, int cornerCol, Cell** prev, Cell* path);
 
 int shortestPath(Grid* grid);
 bool isValidCell(int row, int col, int m, int n);

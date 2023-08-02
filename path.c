@@ -5,7 +5,7 @@
 #include <stdlib.h>
 
 
-void findShortestPath(Grid* grid, int cornerRow, int cornerCol) {
+void findShortestPath (Grid* grid, int cornerRow, int cornerCol, Cell** prev, Cell* path) {
     int directions[4][2] = {{-1, 0}, {0, 1}, {1, 0}, {0, -1}}; 
 
     int queueSize = grid->m * grid->n;
@@ -25,7 +25,7 @@ void findShortestPath(Grid* grid, int cornerRow, int cornerCol) {
     visited[grid->start_row][grid->start_col] = true;
 
     //store previous cells
-    Cell prev[grid->m][grid->n];
+    //Cell prev[grid->m][grid->n];
     for (int i = 0; i < grid->m; i++) {
         for (int j = 0; j < grid->n; j++) {
             prev[i][j] = startCell; //
@@ -36,7 +36,7 @@ void findShortestPath(Grid* grid, int cornerRow, int cornerCol) {
         Cell currentCell = dequeue(&queue, queueSize);
 
         if (currentCell.row == cornerRow && currentCell.col == cornerCol) {
-            Cell path[grid->m * grid->n]; 
+            //Cell path[grid->m * grid->n]; 
             int pathLength = 0;
             Cell backtrackCell = currentCell;
 

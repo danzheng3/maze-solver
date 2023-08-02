@@ -13,13 +13,16 @@ int main(int argc, char* argv[]) {
     fscanf(inputFile, "(%d,%d)\n", &(grid.m), &(grid.n));
     fscanf(inputFile, "(%d,%d)\n", &(grid.start_row), &(grid.start_col));
 
-    int product=grid.m*grid.n;
-    if (product/grid.m !=grid.n) {
-        return EXIT_FAILURE;
-    }
 
     if (grid.m <= 1 || grid.n <= 1) {
         fclose(inputFile);
+        printf("hit3\n");
+        return EXIT_FAILURE;
+    }
+    int product=grid.m*grid.n;
+    if (product/grid.m !=grid.n) {
+        printf("hit2\n");
+        printf("%d  %d", grid.m, grid.n);
         return EXIT_FAILURE;
     }
 
@@ -36,6 +39,7 @@ int main(int argc, char* argv[]) {
     fclose(inputFile);
 
     if (!isValidRoom(&grid, grid.start_row, grid.start_col)) {
+        printf("hit");
         freeGridMemory(&grid);
         return EXIT_FAILURE;
     }
@@ -56,12 +60,23 @@ int main(int argc, char* argv[]) {
 
         return EXIT_SUCCESS;
     } else if(strcmp(option,"-p")==0) {
-        findShortestPath(&grid,0,0);
-        findShortestPath(&grid,0,grid.n-1);
-        findShortestPath(&grid,grid.m-1,grid.n-1);
-        findShortestPath(&grid,grid.m-1,0);
+        Cell** prev = (Cell**)malloc(grid.m*grid.n*sizeof(Cell*));
+        for(int i=0; i<grid.m; i++) {
+            prev[i]=(Cell*)malloc(grid.n*sizeof(Cell));
+        }
+
+        Cell* path = (Cell*)malloc(grid.m *grid.n* sizeof(Cell));
+        findShortestPath(&grid,0,0,prev,path);
+        findShortestPath(&grid,0,grid.n-1,prev,path);
+        findShortestPath(&grid,grid.m-1,grid.n-1,prev,path);
+        findShortestPath(&grid,grid.m-1,0,prev,path);
 
         freeGridMemory(&grid);
+        for (int i =0; i<grid.m; i++) {
+            free(prev[i]);
+        }
+        free(prev);
+        free(path);
 
     } else if (strcmp(option,"-r")==0) {
         fprintf(stdout, "%d\n", shortestPath(&grid));
